@@ -2,3 +2,5 @@
 *.txt
 *.vscode
 *__pycache__
+*.h5ad
+*.pyc
