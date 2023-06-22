@@ -1,0 +1,3 @@
+{
+  "SMID_BREAST_CANCER_RELAPSE_IN_BRAIN_UP" : {"systematicName":"M14383","pmid":"18451135","exactSource":"Figure 1S: brain up","geneSymbols":["ART3","BCL11A","CCKAR","CDH3","CENPF","CENPN","CHST3","COL9A3","CP","CXCL9","DLX5","EGFL6","EGFR","EN1","FOLR1","GDF5","HOXA9","IGHV3-23","IGHV4-61","IMPA2","KCNK5","KIFC1","KRT16","LDHB","MCM10","MCM5","MMP7","PRAME","PRKX","PTX3","RARRES1","SCRG1","SFRP1","ST8SIA1","TMSB15A","TNFRSF21","TRIM29","TTLL4","VGLL1","VSNL1","WWTR1"],"msigdbURL":"https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/SMID_BREAST_CANCER_RELAPSE_IN_BRAIN_UP","externalDetailsURL":[],"filteredBySimilarity":[],"externalNamesForSimilarTerms":[],"collection":"C2:CGP"}
+}
