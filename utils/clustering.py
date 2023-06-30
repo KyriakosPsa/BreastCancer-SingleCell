@@ -11,7 +11,7 @@ import scanpy as sc
 import anndata as ad
 
 
-def hierarchical(data,adata,linkage,n_clusters,ground_labels = None,comparison_key = "Ground labels",compare = True):
+def hierarchical(data,adata,linkage,n_clusters,ground_labels = None,comparison_key = "Ground labels",compare = True, single_plot = True):
   model = AgglomerativeClustering(n_clusters=n_clusters, affinity='euclidean', linkage=linkage)
   labels = model.fit_predict(data)
   score = silhouette_score(data,labels)
@@ -26,7 +26,12 @@ def hierarchical(data,adata,linkage,n_clusters,ground_labels = None,comparison_k
     print(f"The fowlkes mallows score with the original labels is: {fow}")
 
   adata.obs[f'{linkage} link Predictions'] = labels.astype(str)
-  if compare:
+  if compare and single_plot:
+    sc.pl.pca(adata, color=[f"{linkage} link Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.umap(adata, color=[f"{linkage} link Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.tsne(adata, color=[f"{linkage} link Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    return score,ari,ami,fow
+  elif compare and not single_plot:
     sc.pl.pca(adata, color=[f"{linkage} link Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
     sc.pl.umap(adata, color=[f"{linkage} link Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
     sc.pl.tsne(adata, color=[f"{linkage} link Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
@@ -38,7 +43,7 @@ def hierarchical(data,adata,linkage,n_clusters,ground_labels = None,comparison_k
     return score
 
 
-def spectral(data,adata,n_clusters,n_neighbors,ground_labels = None,comparison_key = "Ground labels",compare = True):
+def spectral(data,adata,n_clusters,n_neighbors,ground_labels = None,comparison_key = "Ground labels",compare = True, single_plot = True):
   model = SpectralClustering(n_clusters=n_clusters,affinity='nearest_neighbors',n_neighbors=n_neighbors,assign_labels="cluster_qr",random_state=42)
   labels = model.fit_predict(data)
   score = silhouette_score(data,labels)
@@ -52,7 +57,12 @@ def spectral(data,adata,n_clusters,n_neighbors,ground_labels = None,comparison_k
     print(f"The fowlkes mallows score with the original labels is: {fow}")
   
   adata.obs['Spectral Predictions'] = labels.astype(str)
-  if compare:
+  if compare and single_plot:
+    sc.pl.pca(adata, color=["Spectral Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.umap(adata, color=["Spectral Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.tsne(adata, color=["Spectral Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    return score,ari,ami,fow
+  elif compare and not single_plot:
     sc.pl.pca(adata, color=["Spectral Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
     sc.pl.umap(adata, color=["Spectral Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
     sc.pl.tsne(adata, color=["Spectral Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
@@ -64,7 +74,7 @@ def spectral(data,adata,n_clusters,n_neighbors,ground_labels = None,comparison_k
   return score
 
 
-def GMM(data,adata,covariance_type,n_components,random_state, init_params,ground_labels=None,comparison_key = "Ground labels",compare = True):
+def GMM(data,adata,covariance_type,n_components,random_state, init_params,ground_labels=None,comparison_key = "Ground labels",compare = True, single_plot = True):
   model = GaussianMixture(covariance_type=covariance_type,random_state = random_state,init_params=init_params,n_components=n_components)
   labels = model.fit_predict(data)
   score = silhouette_score(data,labels)
@@ -78,7 +88,12 @@ def GMM(data,adata,covariance_type,n_components,random_state, init_params,ground
     print(f"The adjusted mutual information (AMI) score with to the original labels is: {ami}")
     print(f"The fowlkes mallows score with the original labels is: {fow}")
   adata.obs['GMM Predictions'] = labels.astype(str)
-  if compare:
+  if compare and single_plot:
+    sc.pl.pca(adata, color=["GMM Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.umap(adata, color=["GMM Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.tsne(adata, color=["GMM Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    return score,ari,ami,fow
+  elif compare and not single_plot:
     sc.pl.pca(adata, color=["GMM Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
     sc.pl.umap(adata, color=["GMM Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
     sc.pl.tsne(adata, color=["GMM Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
@@ -89,7 +104,7 @@ def GMM(data,adata,covariance_type,n_components,random_state, init_params,ground
     sc.pl.tsne(adata, color=["GMM Predictions"],add_outline=True, size = 100, palette="coolwarm")
     return score
 
-def nonnegativefactorization(data,adata,ground_labels,init,n_clusters,comparison_key = "Ground labels"):
+def nonnegativefactorization(data,adata,ground_labels,init,n_clusters,comparison_key = "Ground labels",single_plot = True):
   model = NMF(n_components=n_clusters, init=init, random_state=0)
   pre_labels = model.fit_transform(data)
   labels = np.argmax(pre_labels,axis=1)
@@ -102,10 +117,14 @@ def nonnegativefactorization(data,adata,ground_labels,init,n_clusters,comparison
   print(f"The adjusted mutual information (AMI) score with to the original labels is: {ami}")
   print(f"The fowlkes mallows score with the original labels is: {fow}")
   adata.obs['NMF Predictions'] = labels.astype(str)
-
-  sc.pl.pca(adata, color=["NMF Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
-  sc.pl.umap(adata, color=["NMF Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
-  sc.pl.tsne(adata, color=["NMF Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
+  if single_plot:
+    sc.pl.pca(adata, color=["NMF Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.umap(adata, color=["NMF Predictions"],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.tsne(adata, color=["NMF Predictions"],add_outline=True, size = 100, palette="coolwarm") 
+  else:
+    sc.pl.pca(adata, color=["NMF Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.umap(adata, color=["NMF Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
+    sc.pl.tsne(adata, color=["NMF Predictions",comparison_key],add_outline=True, size = 100, palette="coolwarm")
   
   return score,ari,ami,fow
   
