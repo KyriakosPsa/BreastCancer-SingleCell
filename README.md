@@ -27,7 +27,7 @@ If you would like to run the code yourself, please follow the instructions below
 ## _Creating the workspace_
 
 1. Clone the repository
-2. Download the reference paper data from the [Google Drive Folder](https://drive.google.com/drive/folders/1goDwt_HCBL1fEAhduti1fv9DkAY_GPCE) and place it in a folder named: `datasets`.
+2. Download the reference paper data, as well as our data from the [Google Drive Folder](https://drive.google.com/drive/folders/1goDwt_HCBL1fEAhduti1fv9DkAY_GPCE) and place it in a folder named: `datasets`.
 3. Run the notebooks in the following order 1. `preprocessing.ipynb` 2. `dimensionalityred.ipynb` 3. `cellseperation.ipynb` 4. `R_genefu_results.ipynb` 5. `cancercellanalysis.ipynb` 6. `immunecellanalysis.ipynb`
 
 ---
