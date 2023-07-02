@@ -6,7 +6,7 @@ In this study, we have successfully replicated and built upon the analysis condu
 
 # **Data Availability**
 
-Both the publicaly avaialble datasets from the reference paper and our own data are available in this [Google Drive Folder](https://drive.google.com/drive/folders/1goDwt_HCBL1fEAhduti1fv9DkAY_GPCE)
+Both the publicly available datasets from the reference paper and our own data are available in this [Google Drive Folder](https://drive.google.com/drive/folders/1goDwt_HCBL1fEAhduti1fv9DkAY_GPCE)
 
 # **Instructions**
 
