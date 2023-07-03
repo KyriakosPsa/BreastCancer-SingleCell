@@ -4,8 +4,6 @@
 
 library(genefu)
 
-rm(list = ls())
-
 expr_data = read.csv("gene_expression.csv", header=FALSE)
 genes = read.csv("gene_names.csv", header=TRUE)
 colnames(expr_data) = genes$GeneID
