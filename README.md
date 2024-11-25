@@ -7,12 +7,15 @@ In this study, we have successfully replicated and built upon the analysis condu
 We present some example figures from the  `Project_Report.pdf` below for easy access:
 
 Visible clusters of carcinoma vs non-carcinoma cells utilizing T-SNE, UMAP, PCA on the Transcripts Per Million (TPM) counts matrix:
+
 ![image](https://github.com/user-attachments/assets/ff098932-9452-4332-a8bd-a2c07eb6e0ad)
 
 T-SNE, UMAP visualization of the Transcripts Per Million (TPM) counts matrix per cell type:
+
 ![image](https://github.com/user-attachments/assets/c8770849-137c-4fee-ba06-d91a5baf07c8)
 
 Results for gene expression analysis for ER+, HER2+, and TNBC marker genes for tumor cells and bulk tumors:
+
 ![image](https://github.com/user-attachments/assets/53f0466c-81c2-46ca-ad9b-632dd481b567)
 
 # **Data Availability**
